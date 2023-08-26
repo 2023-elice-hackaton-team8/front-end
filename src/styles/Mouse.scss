@@ -11,10 +11,12 @@
 }
 
 .head_whiteMouse{
+  margin: 0 auto -20px auto;
+  text-align: left;
   height: 100px;
-  width: 100%;
+  width: 90%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
   .h2{
@@ -103,7 +105,6 @@
 }
 .problem{
   display: flex;
-  position: relative;
   width: 70%;
   height: 180px;
   align-items: center;
@@ -114,10 +115,39 @@
   background-color: var(--brand1_20);
   border-radius: 10px;
 
+
+  //============== 스크롤바 관련 (시작) ==============
+  overflow-y: scroll;
+
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  table-layout:fixed;
+
+  &::-webkit-scrollbar {
+    width: 9px;  /* 스크롤바의 너비 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: auto; /* 스크롤바의 길이 */
+    width: 7px;
+    background: var(--brand1_40); /* 스크롤바의 색상 */
+
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--backGround_2);  /*스크롤바 뒷 배경 색상*/
+    border-radius: 10px;
+  }
+  //============== 스크롤바 관련 (끝) ==============
+
   p {
-    margin-top: 30px;
-    font-size: 30px;
+    margin: 30px 20px 0 20px;
+    font-size: 23px;
     font-weight: 600;
+    text-align: center;
   }
 
   p:first-child {
@@ -126,13 +156,6 @@
 
   p:not(:first-child) {
     margin-top: 0px; /* 원하는 간격으로 조정 */
-  }
-
-  .mouse_img{
-    width: 150px;
-    position: absolute;
-    left: -22%;
-    top: 10%;
   }
 }
 
@@ -187,10 +210,18 @@
   height: 0.5px;
   width: 750px;
   margin: auto;
-  background-color: var(--brand1_main);
-  stroke: var(--brand1_main);
+  background-color: var(--brand1_40);
+  stroke: var(--brand1_40);
   stroke-width: 2px;
   margin-bottom: 20px;
+
+  position: relative;
+
+  .mouse_img{
+    width: 150px;
+    position: absolute;
+    left: -5%;
+  }
 }
 .submit{
   display: flex;

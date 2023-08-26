@@ -5,15 +5,15 @@ import whiteMouse from "../assets/images/whiteMouse.png";
 import blackMouse from "../assets/images/blackMouse.png";
 
 const HomePage = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
-        const loginCheck = !!sessionStorage.getItem("accessToken")
-        setIsLoggedIn(loginCheck)
-        if (isLoggedIn) {
-            navigate('/main')
-        } else {
+        const accessToken = sessionStorage.getItem("accessToken");
+        console.log(accessToken);
+        const loginCheck = (!!accessToken);
+
+        console.log(loginCheck)
+        if (!loginCheck) {
             navigate('/login')
         }
     })
@@ -45,7 +45,7 @@ const HomePage = () => {
                         </button>
                     </Link>
                 </div>
-                <Link to='/' className="note_link" >
+                <Link to='/problemlist' className="note_link" >
                     <button className="note_button">
                         내글씨 정리노트
                     </button>

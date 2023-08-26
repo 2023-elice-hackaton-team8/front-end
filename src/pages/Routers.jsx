@@ -10,12 +10,11 @@ import SignupPage from "./user/SignupPage";
 // import EditProfilePage from "./user/EditProfilePage";
 // import UserProfilePage from "./user/UserProfilePage";
 // import ProjectDetailPage from "./project/ProjectDetailPage";
-// import ProjectListPage from "./project/ProjectListPage";
 // import ProjectCreatePage from "./project/ProjectCreatePage";
 
 import WhiteMouse from "./WhiteMousePage";
 import BlackMouse from "./BlackMousePage";
-// import ProblemList from "./ProblemList";/
+import ProblemList from "./ProblemListPage";
 // import HowToUse from "./HowToUse";/
 // import LogOut from "./LogOut";/
 
@@ -38,7 +37,7 @@ export default function Routers() {
 
       <Route path='/whitemouse' element={<WhiteMouse />} />
       <Route path='/blackmouse' element={<BlackMouse />} />
-      {/*<Route path='/problemlist' element={<ProblemList />} />*/}
+      <Route path='/problemlist' element={<ProblemList />} />
       {/*<Route path='/howtouse' element={<HowToUse />} />*/}
       {/*<Route path='/logout' element={<LogOut />} />*/}
 

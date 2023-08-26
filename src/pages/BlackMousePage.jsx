@@ -1,8 +1,14 @@
 import React, {useEffect, useState} from "react";
-import SelectLevel from "../components/selector/SelectLevel";
+import blackMouse from "../assets/images/blackMouse.png";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const BlackMousePage = () => {
+    const baseURL = "https://15.165.26.250:443";
+    const API = "/exams";
+    const navigate = useNavigate()
     const [selectedItem, setSelectedItem] = useState(null);
+    const [onProblemSelect, setOnProblemSelect] = useState(false);
 
     const grade = [
         {id : 1, value: "초급"},
@@ -10,123 +16,247 @@ const BlackMousePage = () => {
         {id : 3, value: "고급"},
     ]
 
-    const [selectedLevel, setSelectedLevel] = useState('');
+    const [selectedLevel, setSelectedLevel] = useState(null);
 
     const handleLevelSelect = (level) => {
         setSelectedLevel(level);
     };
 
-    const [subject, setSubject] = useState([
+    const [subjects, setSubjects] = useState([
         "국어",
         "수학",
-        "사회탐구",
+        "사회문화",
         "과학탐구",
         "직업탐구",
         "제2외국어/한문",
     ])
+    const [selectedSubject, setSelectedSubject] = useState(null)
     const [mainSubject, setMainSubject] = useState(null)
+    const [selectedMainSubject, setSelectedMainSubject] = useState(null)
     const [middleSubject, setMiddleSubject] = useState(null)
-
-    const [subjectList, setSubjectList] = useState(
-        {
-            subjects: [
-                {
-                    name: "국어",
-                    subtopics: [],
-                },
-                {
-                    name: "수학",
-                    subtopics: [],
-                },
-                {
-                    name: "사회탐구",
-                    subtopics: [
-                        {
-                            name: "사회 문화 현상의 탐구",
-                            subtopics: [
-                                "사회 문화 현상의 이해",
-                                "사회 문화 현상의 연구 방법",
-                                "자료 수집 방법",
-                                "사회 문화 현상의 탐구 태도와 연구 윤리"
-                            ],
-                        },
-                        {
-                            name: "개인과 사회 구조",
-                            subtopics: [
-                                "사회적 존재로서의 인간",
-                                "사회 집단과 사회 조직",
-                                "사회 구조와 일탈 행동"
-                            ],
-                        },
-                        {
-                            name: "문화와 일상생활",
-                            subtopics: [
-                                "문화의 이해",
-                                "현대 사회의 문화 양상",
-                                "문화 변동의 양상과 대응"
-                            ],
-                        },
-                        {
-                            name: "사회 계층과 불평등",
-                            subtopics: [
-                                "사회 불평등 현상의 이해",
-                                "사회 이동과 사회 계층 구조",
-                                "다양한 사회 불평등 현상",
-                                "사회 복지와 보기 제도"
-                            ],
-                        },
-                        {
-                            name: "현대 사회 변동",
-                            subtopics: [
-                                "사회 변동과 사회 운동",
-                                "현대 사회의 변화와 전 지구적 수준의 문제"
-                            ],
-                        },
-                    ],
-                },
-                {
-                    name: "과학탐구",
-                    subtopics: [],
-                },
-                {
-                    name: "직업탐구",
-                    subtopics: [],
-                },
-                {
-                    name: "제2외국어/한문",
-                    subtopics: [],
-                },
-            ],
-        });
+    const [selectedMiddleSubject, setSelectedMiddleSubject] = useState(null)
+    const [problem, setProblem] = useState(null)
+    const [request, setRequest] = useState(null)
 
     useEffect(() => {
-        console.log(subjectList)
+        console.log(selectedSubject);
+        getSubjectList(selectedSubject);
+    }, [selectedSubject]);
 
-        subjectList.subjects.forEach((newsubject, index) => {
+    useEffect(() => {
+        console.log(selectedMainSubject);
+        getMiddleSubjectList(selectedMainSubject);
+    }, [selectedMainSubject]);
 
-        });
+    const getSubjectList = (e) => {
+        console.log("e", e);
+        if (!e) {
+            return;
+        }
+        const accessToken = sessionStorage.getItem("accessToken")
+        console.log(sessionStorage, accessToken, e);
 
-    }, []);
-
-    const handleSelect = (item) => {
-        setSelectedItem(item);
+        ///friend/getDetailedFriendList/{userId}
+        axios.get(`${baseURL}${API}/sub-title?title=${e}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            })
+            .then((response) => {
+                console.log('MainSubjectSelect sucess : ', response.data.result.titles);
+                setMainSubject(response.data.result.titles);
+            })
+            .catch((error) => {
+                console.error('mainsubject fail : ', error);
+            });
     };
+
+    const getMiddleSubjectList = (e) => {
+        console.log("e", e);
+        if (!e) {
+            return;
+        }
+        const accessToken = sessionStorage.getItem("accessToken")
+        console.log(sessionStorage, accessToken, e);
+
+        ///friend/getDetailedFriendList/{userId}
+        axios.get(`${baseURL}${API}/sub-title?title=${e}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            })
+            .then((response) => {
+                console.log('MainSubjectSelect sucess : ', response.data.result.titles);
+                setMiddleSubject(response.data.result.titles);
+            })
+            .catch((error) => {
+                console.error('mainsubject fail : ', error);
+            });
+    };
+
+    const SubjectSelect = (item) => {
+        const value = item.target.value;
+        setSelectedSubject(value);
+        setMiddleSubject([]);
+        setSelectedMainSubject(null);
+        setSelectedMiddleSubject(null);
+    };
+
+    const MainSubjectSelect = (item) => {
+        const value = item.target.value;
+        setSelectedMainSubject(value);
+    };
+
+    const MiddleSubjectSelect = (item) => {
+        const value = item.target.value;
+        setSelectedMiddleSubject(value);
+    };
+
+    const requestChange = (e) => {
+        e.preventDefault()
+        const value = e.target.value;
+
+        setRequest(value);
+    }
+
+    const submitSelect = () => {
+        const accessToken = sessionStorage.getItem("accessToken")
+
+        console.log(selectedMiddleSubject, selectedLevel);
+
+        if (selectedMiddleSubject === null) {
+            return;
+        }
+
+        axios.get(`${baseURL}${API}?subjectMid=${selectedMiddleSubject}&type=ADVANCED`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            })
+            .then((response) => {
+                console.log('MainSubjectSelect sucess : ', response.data.result);
+                setProblem(response.data.result);
+            })
+            .catch((error) => {
+                console.error('mainsubject fail : ', error);
+            });
+        setOnProblemSelect(true);
+    };
+
     return (
         <>
-            <div>
-                blackMouse
-            </div>
-
-            <div className="blackMouse">
-                <div className="head_Mouse">
-                    <div>select</div>
-                    <SelectLevel onSelectLevel={handleLevelSelect} />
+            <div className="Mouse">
+                <div className="head_whiteMouse">
+                    <h1>깜쥐</h1>
+                    <div></div>
                 </div>
-                <div className="Mouse">
-                    <div>
-
-                    </div>
+                <div className="line">
+                    {onProblemSelect &&
+                    <img src={blackMouse} alt="blackMouse" className="mouse_img"/>
+                    }
                 </div>
+                {
+                    onProblemSelect?
+                        <>
+                            <div className="problem">
+                                <p>
+                                    "{problem && problem.explanation}"
+                                </p>
+                                <p>
+                                    에 대해 설명하시오
+                                </p>
+
+                            </div>
+                            <div className="request">
+                                <textarea value={request} onChange={requestChange}/>
+                            </div>
+
+                            <div className="submit">
+                                <button className="submit_button" onClick={submitSelect}>
+                                    제출하기
+                                </button>
+                            </div>
+                        </>
+                        :
+                        <>
+                            <div className="MouseList">
+                                <div className="box">
+                                    <div className="title">
+                                        과목
+                                    </div>
+                                    <div className="selected">
+                                        {
+                                            selectedSubject ?
+                                                selectedSubject
+                                                : "과목을 선택하세요"
+                                        }
+                                    </div>
+                                    <div className="selecting_list">
+                                        {
+                                            subjects &&
+                                            subjects.map((subject) => (
+                                                <button key={subject} value={subject} onClick={SubjectSelect}>
+                                                    {subject}
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                                <div className="box">
+                                    <div className="title">
+                                        대단원
+                                    </div>
+                                    <div className="selected">
+                                        {
+                                            selectedMainSubject ?
+                                                selectedMainSubject
+                                                : "대단원을 선택하세요"
+                                        }
+                                    </div>
+                                    <div className="selecting_list">
+                                        {
+                                            mainSubject &&
+                                            mainSubject.map((subject) => (
+                                                <button key={subject} value={subject} onClick={MainSubjectSelect}>
+                                                    {subject}
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                                <div className="box">
+                                    <div className="title">
+                                        중단원
+                                    </div>
+                                    <div className="selected">
+                                        {
+                                            selectedMiddleSubject ?
+                                                selectedMiddleSubject
+                                                : "중단원을 선택하세요"
+                                        }
+                                    </div>
+                                    <div className="selecting_list">
+                                        {
+                                            middleSubject &&
+                                            middleSubject.map((subject) => (
+                                                <button key={subject} value={subject} onClick={MiddleSubjectSelect}>
+                                                    {subject}
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="submit">
+                                <button className="submit_button" onClick={submitSelect}>
+                                    찾아보기
+                                </button>
+                            </div>
+                        </>
+                }
             </div>
         </>
     )
