@@ -39,6 +39,7 @@ const WhiteMousePage = () => {
     const [selectedMiddleSubject, setSelectedMiddleSubject] = useState(null)
     const [problem, setProblem] = useState(null)
     const [request, setRequest] = useState(null)
+    const [result, setResult] = useState(null)
 
     useEffect(() => {
         console.log(selectedSubject);
@@ -66,7 +67,7 @@ const WhiteMousePage = () => {
                 }
             })
             .then((response) => {
-                console.log('MainSubjectSelect sucess : ', response.data.result.titles);
+                console.log(response);
                 setMainSubject(response.data.result.titles);
             })
             .catch((error) => {
@@ -150,6 +151,31 @@ const WhiteMousePage = () => {
         setOnProblemSelect(true);
     };
 
+    const submitProblem = () => {
+        const accessToken = sessionStorage.getItem("accessToken")
+
+        console.log("problem.id, request", problem.examId, request)
+
+        if (request === null) {
+            return;
+        }
+
+        axios.post(`${baseURL}${API}/white-mouse?examId=${problem.examId}&answer=${request}`, null,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            })
+            .then((response) => {
+                console.log('MainSubjectSelect sucess : ', response.data);
+                setResult(response.data.result);
+            })
+            .catch((error) => {
+                console.error('mainsubject fail : ', error);
+            });
+        setOnProblemSelect(true);
+    };
+
     return (
         <>
             <div className="Mouse">
@@ -157,7 +183,11 @@ const WhiteMousePage = () => {
                     <h1>백쥐</h1>
                     <SelectLevel onSelectLevel={handleLevelSelect} />
                 </div>
-                <div className="line"></div>
+                <div className="line">
+                    {onProblemSelect &&
+                    <img src={whiteMouse} alt="whiteMouse" className="mouse_img"/>
+                    }
+                </div>
                 {
                     onProblemSelect?
                         <>
@@ -165,18 +195,13 @@ const WhiteMousePage = () => {
                                 <p>
                                     "{problem && problem.explanation}"
                                 </p>
-                                <p>
-                                    에 대해 설명하시오
-                                </p>
-
-                                <img src={whiteMouse} alt="whiteMouse" className="mouse_img"/>
                             </div>
                             <div className="request">
                                 <textarea value={request} onChange={requestChange}/>
                             </div>
 
                             <div className="submit">
-                                <button className="submit_button" onClick={submitSelect}>
+                                <button className="submit_button" onClick={submitProblem}>
                                     제출하기
                                 </button>
                             </div>

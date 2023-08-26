@@ -8,7 +8,7 @@ const LoginForm = ({ form, setForm }) => {
     const { isValidEmail, setIsValidEmail, loginUser, validateEmail } = useLoginEmail();
 
     const handleSignupPage = () => {
-        navigate('/signup');
+        navigate('/');
     };
 
     const showAlert = (title, text, icon) => {

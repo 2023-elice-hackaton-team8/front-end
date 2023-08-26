@@ -1,0 +1,41 @@
+.article{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  grid-template-columns: 1fr;
+
+  .article_button{
+    display: grid;
+    margin: 10px;
+    width: 700px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: "IBM Plex Sans KR", sans-serif;
+    color: var(--brand1_main);
+    font-weight: 700;
+    background-color: var(--white);
+    border: 3px solid var(--brand1_main);
+    border-radius: 10px;
+    filter: drop-shadow(1px 1px 2px rgb(0, 0, 0, 0.25));
+    grid-template-columns: 70% 20% 10%;
+
+    .article_title{
+      text-align: left;
+      font-size: 20px;
+    }
+
+    .article_tags{
+      text-align: center;
+    }
+  }
+}
+
+.article_none{
+  color: var(--brand1_main);
+  font-size: 30px;
+  margin: 120px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 700;
+}
