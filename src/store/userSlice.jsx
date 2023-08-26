@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 export const loginUserThunk = createAsyncThunk(
     'user/loginUser',
     async (loginData, { dispatch, rejectWithValue }) => {
-      const loginURL = 'https://15.165.26.250:443/users/login'
+      const loginURL = 'https://15.165.26.250:8084/users/login'
       try {
         const response = await axios.post(`${loginURL}`, loginData, {
           headers: { "Content-Type": "application/json" }
