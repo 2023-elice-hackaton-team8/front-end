@@ -56,3 +56,156 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+.box{
+  width: 90%;
+  font-family: "IBM Plex Sans KR", sans-serif;
+
+  .title{
+    width: 90%;
+    text-align: right;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .selected{
+    width: 80%;
+    height: 40px;
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    padding-left: 10px;
+    align-items: center;
+    color: var(--black);
+    font-size: 16px;
+    margin : auto;
+    background-color: var(--white);
+    border: 3px solid var(--brand2_main);
+    border-radius: 10px;
+  }
+
+  .selecting_list{
+    button {
+      width: 80%;
+      height: 40px;
+      display: flex;
+      justify-content: left;
+      text-align: center;
+      padding-left: 10px;
+      align-items: center;
+      color: var(--font_gray_main);
+      font-size: 16px;
+      margin : 5px auto;
+      background-color: var(--white);
+      border: 3px solid var(--brand2_40);
+      border-radius: 10px;
+    }
+  }
+}
+.problem{
+  display: flex;
+  position: relative;
+  width: 70%;
+  height: 180px;
+  align-items: center;
+  flex-direction: column;
+
+  margin: 20px auto;
+
+  background-color: var(--brand1_20);
+  border-radius: 10px;
+
+  p {
+    margin-top: 30px;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  p:first-child {
+    margin-top: 30px;
+  }
+
+  p:not(:first-child) {
+    margin-top: 0px; /* 원하는 간격으로 조정 */
+  }
+
+  .mouse_img{
+    width: 150px;
+    position: absolute;
+    left: -22%;
+    top: 10%;
+  }
+}
+
+.request{
+  display: flex;
+  width: 70%;
+  height: 180px;
+  justify-content: center;
+
+  margin: auto;
+
+  textarea{
+
+    //============== 스크롤바 관련 (시작) ==============
+    overflow-y: scroll;
+
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    table-layout:fixed;
+
+    &::-webkit-scrollbar {
+      width: 9px;  /* 스크롤바의 너비 */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: auto; /* 스크롤바의 길이 */
+      width: 7px;
+      background: var(--brand1_40); /* 스크롤바의 색상 */
+
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--backGround_2);  /*스크롤바 뒷 배경 색상*/
+      border-radius: 10px;
+    }
+    //============== 스크롤바 관련 (끝) ==============
+    width: 100%;
+    outline: 2px solid var(--brand1_main);
+    border-radius: 10px;
+
+    color: var(--font_gray_main);
+    padding: 20px;
+  }
+}
+
+.line{
+  display: grid;
+  justify-content: center;
+  height: 0.5px;
+  width: 750px;
+  margin: auto;
+  background-color: var(--brand1_main);
+  stroke: var(--brand1_main);
+  stroke-width: 2px;
+  margin-bottom: 20px;
+}
+.submit{
+  display: flex;
+  width: 90%;
+  justify-content: right;
+
+  .submit_button{
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    color: var(--white);
+    font-weight: 700;
+    background-color: var(--brand1_main);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}

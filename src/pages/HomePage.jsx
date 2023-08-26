@@ -1,10 +1,22 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "../styles/HomePage.scss"
-import React from "react";
+import React, {useEffect, useState} from "react";
 import whiteMouse from "../assets/images/whiteMouse.png";
 import blackMouse from "../assets/images/blackMouse.png";
 
 const HomePage = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const loginCheck = !!sessionStorage.getItem("accessToken")
+        setIsLoggedIn(loginCheck)
+        if (isLoggedIn) {
+            navigate('/main')
+        } else {
+            navigate('/login')
+        }
+    })
 
     return (
         <>

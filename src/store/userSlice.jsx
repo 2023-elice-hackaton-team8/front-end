@@ -9,13 +9,9 @@ export const loginUserThunk = createAsyncThunk(
         const response = await axios.post(`${loginURL}`, loginData, {
           headers: { "Content-Type": "application/json" }
         })
-          console.log(response)
-          console.log(response.data)
-          sessionStorage.setItem("userIdx", response.data.nickName)
-        sessionStorage.setItem("accessToken", response.data.accessToken)
-        sessionStorage.setItem("refreshToken", response.data.refreshToken)
-        console.log(sessionStorage)
-        window.location.href ='/';
+          sessionStorage.setItem("userIdx", response.data.result.nickName)
+        sessionStorage.setItem("accessToken", response.data.result.accessToken)
+        // window.location.href ='/main';
       } catch (error) {
         return rejectWithValue(error)
       }
