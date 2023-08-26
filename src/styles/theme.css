@@ -32,10 +32,9 @@
     --font_gray_main: #454545FF;
 
     /*point1*/
-    --point1_1: #ECE3FAFF;
-    --point1_2: #D8C7F6FF;
-    --point1_3: #C3ABF0FF;
-    --point1_4: #AD90EBFF;
-    --point1_5: #9675E5FF;
-    --point1_main: #7D5BDFFF;
+    --point1_20: #0C8CE933;
+    --point1_40: #0C8CE966;
+    --point1_60: #0C8CE999;
+    --point1_80: #0C8CE9CC;
+    --point1_main: #0C8CE9FF;
 }

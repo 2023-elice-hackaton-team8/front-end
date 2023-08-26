@@ -15,8 +15,8 @@ const SelectLevel = ({ onSelectLevel }) => {
                 <input
                     type="radio"
                     name="levelRadio"
-                    value="초급"
-                    checked={selectedLevel === '초급'}
+                    value="BASIC"
+                    checked={selectedLevel === 'BASIC'}
                     onChange={handleLevelChange}
                 />
                 초급
@@ -25,8 +25,8 @@ const SelectLevel = ({ onSelectLevel }) => {
                 <input
                     type="radio"
                     name="levelRadio"
-                    value="중급"
-                    checked={selectedLevel === '중급'}
+                    value="INTERMEDIATE"
+                    checked={selectedLevel === 'INTERMEDIATE'}
                     onChange={handleLevelChange}
                 />
                 중급
@@ -35,8 +35,8 @@ const SelectLevel = ({ onSelectLevel }) => {
                 <input
                     type="radio"
                     name="levelRadio"
-                    value="고급"
-                    checked={selectedLevel === '고급'}
+                    value="ADVANCED"
+                    checked={selectedLevel === 'ADVANCED'}
                     onChange={handleLevelChange}
                 />
                 고급
