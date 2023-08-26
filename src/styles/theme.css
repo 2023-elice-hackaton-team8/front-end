@@ -1,0 +1,41 @@
+:root {
+    /*black & white*/
+    --black: #000000FF;
+    --white: #FFFFFFFF;
+    --transpar : #FFFFFF00;
+
+    /*backGround*/
+    --backGround_20: #E1E6F133;
+    --backGround_40: #E1E6F166;
+    --backGround_60: #E1E6F199;
+    --backGround_80: #E1E6F1CC;
+    --backGround_main: #E1E6F1FF;
+
+    /*brand1*/
+    --brand1_20: #854BF733;
+    --brand1_40: #854BF766;
+    --brand1_60: #854BF799;
+    --brand1_80: #854BF7CC;
+    --brand1_main: #854BF7FF;
+
+    /*brand2*/
+    --brand2_20: #292A7C33;
+    --brand2_40: #292A7C66;
+    --brand2_60: #292A7C99;
+    --brand2_80: #292A7CCC;
+    --brand2_main: #292A7CFF;
+
+    /*font(burgundy)*/
+    --font_burgundy_main: #CC556AFF;
+
+    /*font(gray)*/
+    --font_gray_main: #454545FF;
+
+    /*point1*/
+    --point1_1: #ECE3FAFF;
+    --point1_2: #D8C7F6FF;
+    --point1_3: #C3ABF0FF;
+    --point1_4: #AD90EBFF;
+    --point1_5: #9675E5FF;
+    --point1_main: #7D5BDFFF;
+}

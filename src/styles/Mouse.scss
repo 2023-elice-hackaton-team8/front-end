@@ -1,0 +1,58 @@
+.Mouse{
+  font-family: "IBM Plex Sans KR", sans-serif;
+  height: 600px;
+  width: 100%;
+  max-width: 840px;
+  background-color: var(--white);
+  margin: auto;
+  justify-content: center;
+  grid-template-columns: 1fr;
+
+}
+
+.head_whiteMouse{
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .h2{
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 700;
+  }
+  .radioButtons {
+    display: flex;
+    justify-content: right;
+    width: 200px;
+  }
+
+  label{
+    text-align: center;
+  }
+
+  input[type="radio"] {
+
+    height: 16px; /* 원하는 크기로 조정 */
+    width: 70px;
+    cursor: pointer;
+    //user-select: none; /* 선택 텍스트 방지 */
+    padding-left: 25px; /* 원하는 간격으로 조정 */
+    //-webkit-appearance: none;
+    //-moz-appearance: none;
+    //appearance: none;
+    border-radius: 50%; /* 동그라미 모양을 유지하기 위해 */
+
+    input[type="radio"]:checked {
+    }
+  }
+
+  div > label{
+
+  }
+}
+
+.MouseList{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

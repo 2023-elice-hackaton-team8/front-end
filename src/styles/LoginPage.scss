@@ -1,0 +1,114 @@
+.login_body{
+  display: flex;
+  height: 600px;
+  width: 100%;
+  max-width: 840px;
+  background-color: var(--white);
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_forms{
+  height: 500px;
+  width: 30vw;
+  display: grid;
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  background-color: var(--white);
+  border: solid 5px var(--brand1_40);
+  border-radius: 5%;
+  filter: drop-shadow(1px 1px 2px rgb(0, 0, 0, 0.25));
+
+  .login_forms_body{
+    display: grid;
+    grid-template-rows: 40% 60%;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+    .forms_set_layout{
+      display: grid;
+      width: 100%;
+
+      & > form {
+        width: 90%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+      }
+
+      & > form > div {
+        margin-top: 10%;
+        height: 100%;
+        display: grid;
+
+        & > input:active {
+          outline: solid 3px var(--point1_main);
+        }
+        & > input:focus {
+          outline: solid 3px var(--point1_main);
+        }
+      }
+      & > form > div > input {
+        font-family: "IBM Plex Sans KR", sans-serif;
+        font-weight: 700;
+        height: 90%;
+        border-radius: 4rem;
+        border: none;
+        padding-left: 15%;
+        font-size: 1.4vw;
+        outline: solid 3px var(--brand1_20);
+      }
+    }
+  }
+}
+.buttonStyle {
+  display: grid;
+  height: 100px;
+  width: 250px;
+  margin: auto;
+  .acceptButton {
+    cursor: pointer;
+    margin-top: 3%;
+    align-items: center;
+    border-radius: 4rem;
+    border: none;
+    background-color: var(--brand1_20);
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 700;
+    font-size: 1.2vw;
+    color: var(--font_burgundy_100);
+    transition: background-color 0.5s;
+    &:hover {
+      background-color: var(--brand2_3);
+      &:active {
+        box-shadow: inset 0 2px 5px rgb(0,0,0, 0.15);
+      }
+    }
+  }
+
+  .rejectButton {
+    cursor: pointer;
+    border: none;
+    background-color: var(--brand2_main);
+    color: var(--white);
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 700;
+    font-size: 1.2vw;
+    border-radius: 4rem;
+    filter: drop-shadow(1px 1px 2px rgb(0, 0, 0, 0.25));
+    transition: color, background-color 0.5s;
+    &:hover {
+      background-color: var(--brand2_3);
+      color: var(--font_burgundy_100);
+      &:active {
+        box-shadow: inset 0 2px 5px rgb(0,0,0, 0.15);
+      }
+    }
+  }
+}
