@@ -6,11 +6,12 @@ import {useNavigate} from "react-router-dom";
 import whiteMouse from "../assets/images/whiteMouse.png";
 
 const WhiteMousePage = () => {
-    const baseURL = "http://15.165.26.250:8080";
+    const baseURL = "https://15.165.26.250:8084";
     const API = "/exams";
     const navigate = useNavigate()
     const [selectedItem, setSelectedItem] = useState(null);
     const [onProblemSelect, setOnProblemSelect] = useState(false);
+    const [onProblemSolved, setOnProblemSolved] = useState(false);
 
     const grade = [
         {id : 1, value: "초급"},
@@ -153,14 +154,17 @@ const WhiteMousePage = () => {
 
     const submitProblem = () => {
         const accessToken = sessionStorage.getItem("accessToken")
-
         console.log("problem.id, request", problem.examId, request)
 
         if (request === null) {
             return;
         }
 
-        axios.post(`${baseURL}${API}/white-mouse?examId=${problem.examId}&answer=${request}`, null,
+        axios.post(`${baseURL}${API}/white-mouse`,
+            {
+                examId : problem.examId,
+                answer : request
+            },
             {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -168,6 +172,7 @@ const WhiteMousePage = () => {
             })
             .then((response) => {
                 console.log('MainSubjectSelect sucess : ', response.data);
+                setOnProblemSolved(true);
                 setResult(response.data.result);
             })
             .catch((error) => {
@@ -175,7 +180,10 @@ const WhiteMousePage = () => {
             });
         setOnProblemSelect(true);
     };
-
+    const reset = () => {
+        setOnProblemSelect(false);
+        setOnProblemSolved(false);
+    }
     return (
         <>
             <div className="Mouse">
@@ -190,6 +198,20 @@ const WhiteMousePage = () => {
                 </div>
                 {
                     onProblemSelect?
+                        onProblemSolved?
+                            <>
+                                <div className="feedback">
+                                {
+                                    <p>{result.feedback}</p>
+                                }
+                                </div>
+                                <div className="submit">
+                                    <button className="submit_button" onClick={reset}>
+                                        돌아가기
+                                    </button>
+                                </div>
+                            </>
+                        :
                         <>
                             <div className="problem">
                                 <p>
