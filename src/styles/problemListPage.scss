@@ -44,7 +44,9 @@
     .article_title{
       text-align: left;
       font-size: 20px;
+      height: 30px;
       margin-left: 20px;
+      overflow: hidden;
     }
   }
 }
@@ -62,6 +64,13 @@
   border-radius: 10px;
   filter: drop-shadow(1px 1px 2px rgb(0, 0, 0, 0.25));
   align-items: center;
+
+  .article_detail_header{
+    margin: 10px 20px 10px 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
   .article_detail_text{
     margin: 10px 20px 10px 20px;
     font-size: 14px;
