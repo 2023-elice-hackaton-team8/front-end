@@ -158,6 +158,25 @@
     margin-top: 0px; /* 원하는 간격으로 조정 */
   }
 }
+
+.result_image{
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 180px;
+  margin: auto;
+  grid-template-columns: 1fr;
+
+  border: 3px solid var(--brand1_20);
+  border-radius: 10px;
+
+  img{
+    max-height: 180px;
+  }
+}
+
 .feedback{
   display: flex;
   width: 70%;
