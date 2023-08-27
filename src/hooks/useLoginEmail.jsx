@@ -19,7 +19,6 @@ const useLoginEmail = () => {
     return emailPattern.test(email);
   };
 
-  
   return { isValidEmail, setIsValidEmail, loginUser, validateEmail };
 };
 

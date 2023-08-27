@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const BlackMousePage = () => {
-    const baseURL = "https://15.165.26.250:443";
+    const baseURL = "https://15.165.26.250:8084";
     const API = "/exams";
     const navigate = useNavigate()
     const [selectedItem, setSelectedItem] = useState(null);
@@ -145,6 +145,23 @@ const BlackMousePage = () => {
             });
         setOnProblemSelect(true);
     };
+//     axios.post(`${baseURL}${API}/black-mouse?examId=${problem.examId}`,
+//         {
+//             answer : request
+//         },
+//             headers: {
+//                 Authorization: `Bearer ${accessToken}`,
+//             }
+//         })
+//         .then((response) => {
+//             console.log('MainSubjectSelect sucess : ', response.data);
+//             setResult(response.data.result);
+//         })
+//         .catch((error) => {
+//             console.error('mainsubject fail : ', error);
+//         });
+//     setOnProblemSelect(true);
+// };
 
     return (
         <>

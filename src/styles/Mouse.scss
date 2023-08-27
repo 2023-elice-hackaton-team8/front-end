@@ -158,6 +158,61 @@
     margin-top: 0px; /* 원하는 간격으로 조정 */
   }
 }
+.feedback{
+  display: flex;
+  width: 70%;
+  height: 380px;
+  align-items: center;
+  flex-direction: column;
+
+  margin: 20px auto;
+
+  background-color: var(--brand1_20);
+  border-radius: 10px;
+
+
+  //============== 스크롤바 관련 (시작) ==============
+  overflow-y: scroll;
+
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  table-layout:fixed;
+
+  &::-webkit-scrollbar {
+    width: 9px;  /* 스크롤바의 너비 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: auto; /* 스크롤바의 길이 */
+    width: 7px;
+    background: var(--brand1_40); /* 스크롤바의 색상 */
+
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--backGround_2);  /*스크롤바 뒷 배경 색상*/
+    border-radius: 10px;
+  }
+  //============== 스크롤바 관련 (끝) ==============
+
+  p {
+    margin: 30px 20px 0 20px;
+    font-size: 23px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  p:first-child {
+    margin-top: 30px;
+  }
+
+  p:not(:first-child) {
+    margin-top: 0px; /* 원하는 간격으로 조정 */
+  }
+}
 
 .request{
   display: flex;
