@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import blackMouse from "../assets/images/blackMouse.png";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -7,8 +7,12 @@ const BlackMousePage = () => {
     const baseURL = "https://15.165.26.250:8084";
     const API = "/exams";
     const navigate = useNavigate()
+    const [file, setFile] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
     const [onProblemSelect, setOnProblemSelect] = useState(false);
+    const [onProblemSolved, setOnProblemSolved] = useState(false);
+
+    const imgRef = useRef();
 
     const grade = [
         {id : 1, value: "초급"},
@@ -37,6 +41,7 @@ const BlackMousePage = () => {
     const [selectedMiddleSubject, setSelectedMiddleSubject] = useState(null)
     const [problem, setProblem] = useState(null)
     const [request, setRequest] = useState(null)
+    const [result, setResult] = useState(null)
 
     useEffect(() => {
         console.log(selectedSubject);
@@ -121,10 +126,54 @@ const BlackMousePage = () => {
         setRequest(value);
     }
 
-    const submitSelect = () => {
+    const submitProblem = () => {
         const accessToken = sessionStorage.getItem("accessToken")
 
-        console.log(selectedMiddleSubject, selectedLevel);
+        const formData = new FormData();
+
+        formData.append("solveBlackReqDto",
+            JSON.stringify({
+                examId: problem.examId,
+            })
+        )
+      formData.append("file", file)
+
+        // formData.append(file)
+
+    //     console.log("file", file);
+    //
+    //     formData.append("file", file);
+    //     for (let [key, value] of formData.entries()) {
+    //         console.log(key, value);
+    //     }
+
+        console.log(problem.examId);
+
+        axios.post(`${baseURL}${API}/black-mouse?examId=${problem.examId}`,
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${accessToken}`,
+                },
+                data : {
+                    answer : request
+                },
+            })
+            .then((response) => {
+                console.log('MainSubjectSelect sucess : ', response.data);
+                setResult(response.data.result);
+                setOnProblemSolved(true);
+                setResult(response.data.result);
+            })
+            .catch((error) => {
+                console.error('mainsubject fail : ', error);
+            });
+        setOnProblemSelect(true);
+    };
+
+    const submitSelect = () => {
+        const accessToken = sessionStorage.getItem("accessToken")
 
         if (selectedMiddleSubject === null) {
             return;
@@ -145,23 +194,12 @@ const BlackMousePage = () => {
             });
         setOnProblemSelect(true);
     };
-//     axios.post(`${baseURL}${API}/black-mouse?examId=${problem.examId}`,
-//         {
-//             answer : request
-//         },
-//             headers: {
-//                 Authorization: `Bearer ${accessToken}`,
-//             }
-//         })
-//         .then((response) => {
-//             console.log('MainSubjectSelect sucess : ', response.data);
-//             setResult(response.data.result);
-//         })
-//         .catch((error) => {
-//             console.error('mainsubject fail : ', error);
-//         });
-//     setOnProblemSelect(true);
-// };
+
+    const saveImgFile = () => {
+        const file = imgRef.current.files[0];
+        console.log(file);
+        setFile(URL.createObjectURL(file));
+    };
 
     return (
         <>
@@ -187,12 +225,25 @@ const BlackMousePage = () => {
                                 </p>
 
                             </div>
-                            <div className="request">
-                                <textarea value={request} onChange={requestChange}/>
+                            <div className="result_image">
+                                {
+                                    file &&
+                                    <img
+                                        src={file}
+                                        alt="이미지"
+                                    />
+                                }
+                                <input
+                                    name="file"
+                                    type="file"
+                                    accept="image/*"
+                                    id="profileImg"
+                                    onChange={saveImgFile}
+                                    ref={imgRef}
+                                />
                             </div>
-
                             <div className="submit">
-                                <button className="submit_button" onClick={submitSelect}>
+                                <button className="submit_button" onClick={submitProblem}>
                                     제출하기
                                 </button>
                             </div>

@@ -1,10 +1,11 @@
 import {Link, useNavigate} from "react-router-dom";
 import "../styles/problemListPage.scss"
 import React, {useEffect, useState} from "react";
-import arrow from "../assets/images/arrow-down.svg";
+import axios from "axios";
+import DetailArticle from "../components/DetailArticle";
 
 const ProblemListPage = () => {
-    const baseURL = "http://15.165.26.250:8080";
+    const baseURL = "https://15.165.26.250:8084";
     const API = "/exams";
 
     const [articles, setArticles] = useState(null)
@@ -19,43 +20,38 @@ const ProblemListPage = () => {
     })
 
     useEffect(() => {
+        console.log(sessionStorage)
+
+        const userIdx = sessionStorage.getItem("userIdx")
         const accessToken = sessionStorage.getItem("accessToken")
 
-        // axios.get(`${baseURL}${API}?userId=${}`,
-        //     {
-        //         headers: {
-        //             Authorization: `Bearer ${accessToken}`
-        //         }
-        //     })
-        //     .then((response) => {
-        //         console.log('MainSubjectSelect sucess : ', response.data.result);
-        //         setProblem(response.data.result);
-        //     })
-        //     .catch((error) => {
-        //         console.error('mainsubject fail : ', error);
-        //     });
-        // setOnProblemSelect(true);
-    })
+        axios.get(`${baseURL}${API}/previous`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            })
+            .then((response) => {
+                console.log('MainSubjectSelect sucess : ', response.data.result);
+                setArticles(response.data.result);
+            })
+            .catch((error) => {
+                console.error('mainsubject fail : ', error);
+            });
+    }, [])
 
     return (
         <>
             <div className="article_list">
+                <div className="article_header">
+                    <h2>내 글씨 정리노트</h2>
+                </div>
                 {
                     articles?
                     articles.map((article) => (
-                        <div className="article">
-                            <div className="article_button">
-                                <div className="article_title">
-                                    문제 제목
-                                </div>
-                                <div className="article_tags">
-                                    문제 태그
-                                </div>
-                                <div className="article_toggle">
-                                    <img src={arrow}/>
-                                </div>
-                            </div>
-                        </div>
+                        <DetailArticle
+                            article={article}
+                        />
                     ))
                     :<div className="article_none">
                         아직 문제를 풀지 않았어요!
