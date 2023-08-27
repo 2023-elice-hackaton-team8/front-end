@@ -33,6 +33,9 @@ const DetailArticle = ({ article }) => {
             {
                 openDetailDiv &&
                 <div className="article_detail">
+                    <h2 className="article_detail_header">
+                        {article.examExplanation}
+                    </h2>
                     <p className="article_detail_text">
                         {article.feedback}
                     </p>
